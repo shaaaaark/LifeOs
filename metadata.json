@@ -1,0 +1,7 @@
+{
+  "name": "Copy of LifeOS",
+  "description": "A multi-platform personal digital life management system featuring work mode, mood tracking, and AI-powered insights.",
+  "requestFramePermissions": [
+    "microphone"
+  ]
+}
