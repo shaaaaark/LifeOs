@@ -1,12 +1,12 @@
 
-import { MoodEntry, MoodLevel, NoteEntry, NoteType, InboxItem, Language, SubscriptionItem } from './types';
+import { MoodEntry, MoodLevel, NoteEntry, NoteType, InboxItem, Language, SubscriptionItem, Contact } from './types';
 
 export const MOCK_MOODS: MoodEntry[] = [
-  { id: '1', level: MoodLevel.GOOD, note: 'Productive morning', tags: ['work', 'focus'], timestamp: Date.now() - 86400000 * 4 },
+  { id: '1', level: MoodLevel.GOOD, note: 'Productive morning', tags: ['work', 'focus'], timestamp: Date.now() - 86400000 * 4, contactIds: ['c3'] },
   { id: '2', level: MoodLevel.NEUTRAL, note: 'Tired afternoon', tags: ['health'], timestamp: Date.now() - 86400000 * 3 },
-  { id: '3', level: MoodLevel.GREAT, note: 'Finished the project!', tags: ['achievement'], timestamp: Date.now() - 86400000 * 2 },
+  { id: '3', level: MoodLevel.GREAT, note: 'Finished the project!', tags: ['achievement'], timestamp: Date.now() - 86400000 * 2, contactIds: ['c3'] },
   { id: '4', level: MoodLevel.BAD, note: 'Stuck in traffic', tags: ['commute'], timestamp: Date.now() - 86400000 * 1 },
-  { id: '5', level: MoodLevel.GOOD, note: 'Nice lunch with team', tags: ['social'], timestamp: Date.now() },
+  { id: '5', level: MoodLevel.GOOD, note: 'Nice lunch with team', tags: ['social'], timestamp: Date.now(), contactIds: ['c4'] },
 ];
 
 export const MOCK_NOTES: NoteEntry[] = [
@@ -29,6 +29,14 @@ export const MOCK_SUBSCRIPTIONS: SubscriptionItem[] = [
   { id: '5', name: 'Adobe Cloud', price: 52.99, currency: 'USD', cycle: 'monthly', nextBillingDate: Date.now() + 86400000 * 15, category: 'productivity', isPrivate: false, icon: '🎨' },
 ];
 
+export const MOCK_CONTACTS: Contact[] = [
+  { id: 'c1', name: 'Mom', role: 'Family', avatar: '👩‍🦳', type: 'family', lastContactDate: Date.now() - 86400000 * 8, frequencyTargetDays: 7, isPrivate: true },
+  { id: 'c2', name: 'Alice', role: 'Best Friend', avatar: '💃', type: 'friend', lastContactDate: Date.now() - 86400000 * 2, frequencyTargetDays: 14, isPrivate: true },
+  { id: 'c3', name: 'David', role: 'Product Manager', avatar: '👨‍💼', type: 'colleague', lastContactDate: Date.now() - 86400000 * 1, frequencyTargetDays: 3, isPrivate: false },
+  { id: 'c4', name: 'Team Alpha', role: 'Work Group', avatar: '🚀', type: 'colleague', lastContactDate: Date.now(), frequencyTargetDays: 1, isPrivate: false },
+  { id: 'c5', name: 'Sarah', role: 'Partner', avatar: '❤️', type: 'partner', lastContactDate: Date.now() - 86400000 * 0.5, frequencyTargetDays: 1, isPrivate: true },
+];
+
 export const TRANSLATIONS = {
   en: {
     // Sidebar
@@ -37,6 +45,7 @@ export const TRANSLATIONS = {
     notes: 'Notes',
     mood: 'Mood',
     subs: 'Subs',
+    social: 'Social',
     settings: 'Settings',
     workMode: 'Work Mode',
     lifeMode: 'Life Mode',
@@ -69,6 +78,7 @@ export const TRANSLATIONS = {
     saveEntry: 'Save Entry',
     recentHistory: 'Recent History',
     hiddenMood: 'Mood tracking is hidden in Work Mode.',
+    whoWith: 'Who are you with?',
 
     // Inbox
     clearMind: 'Clear your mind.',
@@ -84,6 +94,18 @@ export const TRANSLATIONS = {
     activeSubs: 'Active Subs',
     addSub: 'Add Sub',
     private: 'PRIVATE',
+
+    // Social CRM
+    socialTitle: 'Social Energy CRM',
+    socialDesc: 'Track your relationships and energy impact.',
+    maintenance: 'Maintenance Status',
+    energyImpact: 'Energy Impact',
+    overdue: 'Overdue',
+    healthy: 'Healthy',
+    daysAgo: 'days ago',
+    recharging: 'Recharging',
+    draining: 'Draining',
+    neutral: 'Neutral',
   },
   zh: {
     // Sidebar
@@ -92,6 +114,7 @@ export const TRANSLATIONS = {
     notes: '笔记',
     mood: '心情',
     subs: '订阅',
+    social: '人脉',
     settings: '设置',
     workMode: '办公模式',
     lifeMode: '生活模式',
@@ -124,6 +147,7 @@ export const TRANSLATIONS = {
     saveEntry: '保存记录',
     recentHistory: '最近记录',
     hiddenMood: '办公模式下心情模块已隐藏。',
+    whoWith: '你和谁在一起？',
 
     // Inbox
     clearMind: '清空大脑，保持专注。',
@@ -139,5 +163,17 @@ export const TRANSLATIONS = {
     activeSubs: '活跃订阅',
     addSub: '添加订阅',
     private: '私密',
+
+    // Social CRM
+    socialTitle: '社交能量 CRM',
+    socialDesc: '追踪你的人际关系维护与能量影响。',
+    maintenance: '维护状态',
+    energyImpact: '能量影响',
+    overdue: '待联系',
+    healthy: '健康',
+    daysAgo: '天前',
+    recharging: '充电',
+    draining: '耗能',
+    neutral: '中性',
   }
 };

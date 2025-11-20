@@ -1,19 +1,26 @@
+
 import React, { useState } from 'react';
-import { MoodEntry, MoodLevel, Language } from '../types';
-import { Frown, Meh, Smile, AlertCircle, ThumbsUp, Heart, CloudRain, Sun, Zap } from 'lucide-react';
+import { MoodEntry, MoodLevel, Language, Contact } from '../types';
+import { Frown, Meh, Smile, AlertCircle, ThumbsUp, Heart, CloudRain, Sun, Zap, Users } from 'lucide-react';
 import { TRANSLATIONS } from '../constants';
 
 interface MoodTrackerProps {
   moods: MoodEntry[];
+  contacts: Contact[];
   onAddMood: (entry: MoodEntry) => void;
   language: Language;
+  workMode: boolean;
 }
 
-export const MoodTracker: React.FC<MoodTrackerProps> = ({ moods, onAddMood, language }) => {
+export const MoodTracker: React.FC<MoodTrackerProps> = ({ moods, contacts, onAddMood, language, workMode }) => {
   const [selectedLevel, setSelectedLevel] = useState<MoodLevel | null>(null);
   const [note, setNote] = useState('');
+  const [selectedContacts, setSelectedContacts] = useState<string[]>([]);
   
   const t = TRANSLATIONS[language];
+
+  // Filter contacts for selection dropdown based on Work Mode
+  const availableContacts = contacts.filter(c => !workMode || !c.isPrivate);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -25,10 +32,18 @@ export const MoodTracker: React.FC<MoodTrackerProps> = ({ moods, onAddMood, lang
       note,
       tags: [],
       timestamp: Date.now(),
+      contactIds: selectedContacts.length > 0 ? selectedContacts : undefined
     };
     onAddMood(newEntry);
     setSelectedLevel(null);
     setNote('');
+    setSelectedContacts([]);
+  };
+
+  const toggleContact = (id: string) => {
+      setSelectedContacts(prev => 
+        prev.includes(id) ? prev.filter(cid => cid !== id) : [...prev, id]
+      );
   };
 
   const moodConfig = {
@@ -111,14 +126,38 @@ export const MoodTracker: React.FC<MoodTrackerProps> = ({ moods, onAddMood, lang
               })}
         </div>
 
-        {/* Note Input - Only show when selected */}
-        <div className={`transition-all duration-500 ease-in-out overflow-hidden ${selectedLevel ? 'opacity-100 max-h-96 translate-y-0' : 'opacity-0 max-h-0 translate-y-4'}`}>
+        {/* Input Area - Only show when selected */}
+        <div className={`transition-all duration-500 ease-in-out overflow-hidden ${selectedLevel ? 'opacity-100 max-h-[600px] translate-y-0' : 'opacity-0 max-h-0 translate-y-4'}`}>
             <div className="glass p-2 rounded-[2.5rem] shadow-2xl bg-white/80 dark:bg-black/40">
+                {/* Who with? */}
+                <div className="px-6 pt-6 pb-2">
+                    <p className="text-xs font-bold text-stone-400 dark:text-zinc-500 uppercase mb-3 tracking-wider flex items-center">
+                        <Users size={14} className="mr-2" /> {t.whoWith}
+                    </p>
+                    <div className="flex flex-wrap gap-2">
+                        {availableContacts.map(contact => (
+                            <button
+                                key={contact.id}
+                                type="button"
+                                onClick={() => toggleContact(contact.id)}
+                                className={`flex items-center gap-2 px-3 py-2 rounded-xl text-sm font-bold transition-all ${
+                                    selectedContacts.includes(contact.id)
+                                        ? 'bg-stone-800 text-white dark:bg-white dark:text-black shadow-md transform scale-105'
+                                        : 'bg-stone-100 text-stone-500 dark:bg-zinc-800 dark:text-zinc-400 hover:bg-stone-200 dark:hover:bg-zinc-700'
+                                }`}
+                            >
+                                <span>{contact.avatar}</span>
+                                <span>{contact.name}</span>
+                            </button>
+                        ))}
+                    </div>
+                </div>
+
                 <textarea
                     value={note}
                     onChange={(e) => setNote(e.target.value)}
                     placeholder={t.addNotePlaceholder}
-                    className="w-full bg-transparent text-stone-800 dark:text-white p-6 rounded-[2rem] focus:outline-none resize-none min-h-[140px] text-xl placeholder-stone-400 dark:placeholder-zinc-600 font-medium"
+                    className="w-full bg-transparent text-stone-800 dark:text-white p-6 rounded-[2rem] focus:outline-none resize-none min-h-[120px] text-xl placeholder-stone-400 dark:placeholder-zinc-600 font-medium border-t border-stone-100 dark:border-white/5 mt-2"
                 />
                 <div className="flex justify-end p-3">
                     <button
@@ -155,6 +194,14 @@ export const MoodTracker: React.FC<MoodTrackerProps> = ({ moods, onAddMood, lang
                            {new Date(mood.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
                         </span>
                    </div>
+                   {mood.contactIds && mood.contactIds.length > 0 && (
+                       <div className="flex gap-1 my-2">
+                           {mood.contactIds.map(cid => {
+                               const c = contacts.find(contact => contact.id === cid);
+                               return c ? <span key={cid} title={c.name} className="text-lg grayscale hover:grayscale-0 transition-all cursor-help">{c.avatar}</span> : null;
+                           })}
+                       </div>
+                   )}
                    {mood.note && <p className="text-stone-600 dark:text-zinc-300 text-base font-medium">{mood.note}</p>}
                 </div>
               </div>

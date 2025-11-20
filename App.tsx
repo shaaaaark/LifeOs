@@ -5,8 +5,9 @@ import { Dashboard } from './components/Dashboard';
 import { MoodTracker } from './components/MoodTracker';
 import { Inbox } from './components/Inbox';
 import { SubscriptionManager } from './components/SubscriptionManager';
-import { ViewMode, MoodEntry, NoteEntry, InboxItem, NoteType, Language, SubscriptionItem } from './types';
-import { MOCK_MOODS, MOCK_NOTES, MOCK_INBOX, MOCK_SUBSCRIPTIONS, TRANSLATIONS } from './constants';
+import { SocialCRM } from './components/SocialCRM';
+import { ViewMode, MoodEntry, NoteEntry, InboxItem, NoteType, Language, SubscriptionItem, Contact } from './types';
+import { MOCK_MOODS, MOCK_NOTES, MOCK_INBOX, MOCK_SUBSCRIPTIONS, MOCK_CONTACTS, TRANSLATIONS } from './constants';
 
 function App() {
   // --- Global State ---
@@ -20,6 +21,7 @@ function App() {
   const [notes, setNotes] = useState<NoteEntry[]>(MOCK_NOTES);
   const [inboxItems, setInboxItems] = useState<InboxItem[]>(MOCK_INBOX);
   const [subscriptions, setSubscriptions] = useState<SubscriptionItem[]>(MOCK_SUBSCRIPTIONS);
+  const [contacts, setContacts] = useState<Contact[]>(MOCK_CONTACTS);
 
   const t = TRANSLATIONS[language];
 
@@ -69,12 +71,14 @@ function App() {
              <p className="font-medium">{t.hiddenMood}</p>
            </div>
         ) : (
-           <MoodTracker moods={moods} onAddMood={handleAddMood} language={language} />
+           <MoodTracker moods={moods} contacts={contacts} onAddMood={handleAddMood} language={language} workMode={workMode} />
         );
       case ViewMode.INBOX:
         return <Inbox items={inboxItems} onAddItem={handleAddInboxItem} language={language} />;
       case ViewMode.SUBSCRIPTIONS:
         return <SubscriptionManager subscriptions={subscriptions} workMode={workMode} language={language} />;
+      case ViewMode.SOCIAL:
+        return <SocialCRM contacts={contacts} moods={moods} workMode={workMode} language={language} />;
       case ViewMode.NOTES:
         return (
           <div className="animate-fade-in">

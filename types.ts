@@ -5,6 +5,7 @@ export enum ViewMode {
   INBOX = 'INBOX',
   NOTES = 'NOTES',
   SUBSCRIPTIONS = 'SUBSCRIPTIONS',
+  SOCIAL = 'SOCIAL',
   SETTINGS = 'SETTINGS'
 }
 
@@ -29,6 +30,7 @@ export interface MoodEntry {
   note: string;
   tags: string[];
   timestamp: number;
+  contactIds?: string[]; // Who were you with?
 }
 
 export interface NoteEntry {
@@ -59,6 +61,20 @@ export interface SubscriptionItem {
   category: 'entertainment' | 'productivity' | 'utility' | 'life';
   isPrivate: boolean; // Hidden in Work Mode if true
   icon?: string; // URL or emoji
+}
+
+// New Feature: Social Energy CRM
+export type ContactType = 'family' | 'friend' | 'colleague' | 'partner' | 'network';
+
+export interface Contact {
+  id: string;
+  name: string;
+  role: string; // e.g. "Mom", "Project Manager"
+  avatar: string; // Emoji or URL
+  type: ContactType;
+  lastContactDate: number;
+  frequencyTargetDays: number; // e.g. 7 means contact once a week
+  isPrivate: boolean; // Hidden in Work Mode
 }
 
 export interface UserSettings {
