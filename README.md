@@ -1,189 +1,137 @@
-# 📘 **LifeOS：多端个人数字生活管理系统（完整版项目总结）**
+# 🌐 LifeOS – Cross-Platform Personal Life Operating System
 
-## 🎯 **一、产品愿景（Vision）**
+> A multi-platform personal data operating system designed to unify emotion tracking, habit management, notes, media storage, reading workflow, social CRM, subscription tracking and health insights — all synchronized across devices with modern cloud architecture.
 
-LifeOS 是一个 **面向普通用户的跨端个人生活数据管理系统**，通过账号登录即可在多端同步情绪、习惯、笔记、媒体与相关数据。
-它不仅是一个多端应用，更是一个贯通生活数据的“个人操作系统”。
-
-核心理念：
-
-> **让用户可以在任何设备上随手记录生活，自动同步，最终形成完整的数据画像。**
+LifeOS is **not** just an app.  
+It is your **personal digital infrastructure** across Web, Mobile, Desktop, Micro-Frontends, and Lightweight Clients.
 
 ---
 
-# 👤 **二、目标用户**
+## ✨ Core Features
 
-* 有记录习惯的普通用户
-* 想管理自己的生活数据（情绪、习惯、想法、截图、照片）
-* 上班使用公司的电脑，但不希望暴露隐私
-* 在手机、电脑、多设备之间切换频繁
-* 想要自动同步 & 备份，而不是自托管
+### 🧠 1. Emotion Tracking (Mood)
+- 1–5 mood scoring
+- Tags, notes, photos
+- Beautiful charts (daily/weekly/monthly trends)
+- Device-wide synchronization
 
----
+### 🔄 2. Habit Tracker
+- Daily habits  
+- Streak tracking  
+- Weekly/Monthly analytics  
 
-# 📌 **三、主要使用场景（核心价值）**
+### 📝 3. Notes (Markdown)
+- Cross-device note-taking  
+- Markdown editor  
+- “Work-safe” notes for office usage  
 
----
+### 🖼 4. Media Library
+- Photos, screenshots, files
+- Tagging, filtering, album organization
+- Cloudflare R2 / Supabase Storage
 
-## **1. 工作电脑（非私人设备） → 需要一个「打工模式」**
+### 📥 5. Inbox (Quick Capture)
+- Desktop: paste text, screenshots, drag files
+- Mobile: quick notes & camera uploads
+- Acts as the “inbox layer” for your life
 
-用户在公司电脑使用桌面端时：
-
-### ✔ 打工 Mode（Work Mode）
-
-* 隐藏私人内容（情绪、私人照片、私密笔记）
-* 仅展示非隐私模块：
-  * 工作笔记（已标记）
-  * Today 清单（无隐私）
-  * 快速收集框（截图、复制文字）
-* 下班后自动关闭（时间策略）
-
-目的：**在公司电脑安全使用，不泄露个人隐私。**
-
----
-
-## **2. 桌面端是“记录中枢 + 数据处理中心”**
-
-桌面端负责：
-
-### ✔ 随手记录（核心场景）
-
-* 复制文字 → 自动进入“收集箱”
-* 截图自动识别并保存（类似 Snip）
-* 文件拖拽 → 自动导入媒体库并同步
-* 简单的内容分类（工作/私人）
-
-### ✔ 离线模式（SQLite）
-
-* 所有数据本地存储 + 阴影同步策略
-* 与 Supabase 做最终一致性同步
-
-### ✔ 大屏分析
-
-* 情绪趋势
-* 习惯连续天数
-* 媒体上传数量趋势
-* 笔记数量、输入量趋势
-* 一天的生活轨迹（数据可视化）
-
-桌面端 = **多端的核心数据处理节点**。
+### 📊 6. Dashboard
+- Mood & habit trends  
+- Activity heatmaps  
+- Upload statistics  
+- Productivity metrics  
 
 ---
 
-## **3. 移动端（React Native）是主要“输入 + 图表查看端”**
+## 🚀 V1.5 – V2.0 Extended Modules
 
-* 随手记录情绪
-* 习惯打卡
-* 拍照 → 自动同步桌面端
-* 查看图表（情绪趋势、习惯统计、生活数据仪表盘）
-* 查看桌面端同步来的文本、截图
+### 💳 Subscription Sentinel
+Track subscription costs, expiry dates, and reminders.  
+Automatically calculates daily cost.
 
-移动端 = 输入 + 图表 + 随手记录。
+### 👥 Social Energy CRM
+Understand how different people affect your emotional energy.  
+Set “care frequency” rules for important relationships.
 
----
+### 📚 Read-It-Later Hub
+Unified reading workflow across devices.  
+Mobile → Desktop → Notes.
 
-## **4. Web（React）作为“功能中心 + 设置中心”**
+### 🔋 Body Battery Sync
+Sync sleep, steps, heart rate with Apple Health / Google Fit.  
+Correlate health metrics with habits & mood.
 
-* 最完整的 UI（Dashboard / 数据管理）
-* 数据表格视图（过滤、搜索、批量操作）
-* 笔记编辑器（Markdown）
-* 媒体库管理
-* 系统配置（标签、字段、同步策略）
-
----
-
-## **5. 微前端子应用（Vue3）负责每日 summary**
-
-例如：
-* 今日情绪
-* 今日照片
-* 今日习惯状态
-* 今日总结
-* 小日历
+### 🕰 Time Capsule / On This Day
+Daily memory review — photos, notes, mood from past years.
 
 ---
 
-## **6. 后台管理系统（Admin）**
+## 🖥 Multi-Platform Architecture
 
-主要用于：
-* 批量删除数据
-* 批量修改标签
-* 批量导出 / 导入 schema
-* 数据校验
-* 自定义字段管理
-* 每日自动备份
+LifeOS runs everywhere:
 
-后台 = **你的个人数据管理工具，不对普通用户开放**。
-
----
-
-# 🧩 **四、核心功能列表（V1.0）**
-
-1. **情绪记录（Mood Tracker）**：输入心情值（1–5），标签/备注，趋势分析。
-2. **习惯打卡（Habit Tracker）**：创建/编辑习惯，连续天数统计。
-3. **笔记（Notes）**：跨端 Markdown 编辑，支持隐私标记。
-4. **媒体库**：拖拽上传，多标签筛选。
-5. **收集箱（Inbox）**：快速记录碎片信息。
-6. **数据看板（Dashboard）**：可视化展示生活数据。
-7. **多端同步**：Supabase Realtime + Cloudflare Worker。
-8. **数据备份**：一键导出/导入 JSON Schema。
+- **Web (React + Vite)**  
+- **Mobile (React Native)**  
+- **Desktop (Tauri)**  
+- **Micro-frontend (Vue3)**  
+- **Hippy Lightweight App**  
+- **Admin Console (React / Next.js)**  
 
 ---
 
-# 🏛 **五、系统架构**
+## 🏗️ Tech Stack
 
-* **多端**：React Web, Vue3 Micro-frontend, React Native, Tauri/Electron.
-* **Monorepo**：TurboRepo + PNPM.
-* **后端**：Supabase (PostgreSQL, Auth, RLS) + Cloudflare (Worker, R2).
-* **同步策略**：Offline-first (SQLite) + Realtime Sync.
+### 📦 Monorepo
+- Turborepo
+- PNPM Workspaces  
+- Shared Types / SDK / UI  
+
+### 🛠 Backend
+- **Supabase** (PostgreSQL + Auth + Realtime)
+- **Cloudflare Workers** (Sync logic)
+- **Cloudflare R2** (Media storage)
+- **SQLite** (Desktop offline mode)
 
 ---
 
-# 🚀 **十、扩展功能模块（V1.5 - V2.0 增补需求）**
+## 🔐 Work Mode (Privacy-First)
+Designed for office computers:
 
-### **1. 订阅哨兵 (Subscription Sentinel)**
-> **痛点**：“我又忘记取消那个免费试用了”、“我每个月到底在软件上花了多少钱？”
+- Hide personal emotions  
+- Hide private photos/notes  
+- Only show “work-safe” data  
+- Automatic switch based on time or manual toggle  
 
-*   **核心价值**：计算“每日生存成本”（Daily Cost），并在续费前 3 天发送提醒。
-*   **Work Mode 策略**：
-    *   上班时：**隐藏** Netflix、Spotify、游戏加速器等娱乐订阅。
-    *   上班时：**仅展示** ChatGPT Plus、Adobe、AWS 等生产力工具订阅。
+---
 
-### **2. 社交能量 CRM (Social Energy CRM)**
-> **痛点**：“我上次给爸妈打电话是什么时候？”、“和谁聊天让我感到快乐，和谁聊天让我内耗？”
+## 🛡 Data Ownership
+Your data is **yours**.
 
-*   **场景描述**：
-    *   **“维护频率”管理**：设置“关心周期”（如：妈妈-每周一次）。
-    *   **关联 Mood**：记录情绪时可选“Who are you with?”。
-    *   **AI 分析**：*“数据显示，每次和某位同事开完会，你的心情值都会跌到 2。”*
-*   **Work Mode 策略**：
-    *   上班时：隐藏所有私人关系（家人、朋友）。
-    *   上班时：仅展示“待跟进客户”、“合作伙伴”。
+- Export `backup.json`  
+- Import schema  
+- Full restore / clean-reset  
 
-### **3. 稍后读流转中心 (Flow / Read-it-Later)**
-> **痛点**：手机上看到好文章想在电脑上看，发给文件传输助手又很乱。
+---
 
-*   **场景描述**：
-    *   手机端 Share Extension 直接分享到 LifeOS。
-    *   桌面端悬浮球显示“手机端刚才推送了 3 个链接”。
-    *   **阅读状态**：Inbox (未读) -> Reading (在读) -> Archived (已归档)。
-*   **Work Mode 策略**：
-    *   上班时：过滤掉娱乐新闻链接。
-    *   上班时：只保留技术文档、行业新闻链接。
+## 🛣 Roadmap (Simplified)
 
-### **4. 生理电量同步 (Body Battery Sync)**
-> **痛点**：“今天为什么效率这么低？”（其实是因为昨晚只睡了 4 小时）
+- [x] Core modules (Mood, Habits, Notes, Media, Inbox)
+- [x] Multi-device Realtime Sync
+- [ ] Subscription Sentinel
+- [ ] Social Energy CRM
+- [ ] Read-It-Later Hub
+- [ ] Body Battery Sync
+- [ ] Time Capsule
+- [ ] AI Assistant (Insights & Reflection)
 
-*   **场景描述**：
-    *   读取 Apple Health / Google Fit 数据（睡眠、步数）。
-    *   **数据关联**：在 Dashboard 叠加显示“睡眠时长 vs 今日 Mood”。
-*   **隐私设计**：在 Work Mode 下完全隐藏健康图表。
+---
 
-### **5. 时光胶囊 (Time Capsule / On This Day)**
-> **痛点**：记录了很多，但很少回顾。
+## 📜 License
+MIT
 
-*   **场景描述**：
-    *   每天早上推送：“去年的今天，你的心情是 [Great]，你拍了这张照片。”
-*   **Work Mode 策略**：
-    *   上班时：只回顾去年的“工作成就”。
-    *   上班时：绝不弹出私人照片。
+---
+
+## 🤝 Contributing
+Contributions welcome!  
+Feel free to open issues or submit PRs.
+
