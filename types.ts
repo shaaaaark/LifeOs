@@ -1,8 +1,10 @@
+
 export enum ViewMode {
   DASHBOARD = 'DASHBOARD',
   MOOD = 'MOOD',
   INBOX = 'INBOX',
   NOTES = 'NOTES',
+  SUBSCRIPTIONS = 'SUBSCRIPTIONS',
   SETTINGS = 'SETTINGS'
 }
 
@@ -44,6 +46,19 @@ export interface InboxItem {
   type: 'text' | 'image' | 'link';
   timestamp: number;
   processed: boolean;
+}
+
+// New Feature: Subscription Sentinel
+export interface SubscriptionItem {
+  id: string;
+  name: string;
+  price: number;
+  currency: 'CNY' | 'USD';
+  cycle: 'monthly' | 'yearly';
+  nextBillingDate: number;
+  category: 'entertainment' | 'productivity' | 'utility' | 'life';
+  isPrivate: boolean; // Hidden in Work Mode if true
+  icon?: string; // URL or emoji
 }
 
 export interface UserSettings {

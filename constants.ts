@@ -1,4 +1,5 @@
-import { MoodEntry, MoodLevel, NoteEntry, NoteType, InboxItem, Language } from './types';
+
+import { MoodEntry, MoodLevel, NoteEntry, NoteType, InboxItem, Language, SubscriptionItem } from './types';
 
 export const MOCK_MOODS: MoodEntry[] = [
   { id: '1', level: MoodLevel.GOOD, note: 'Productive morning', tags: ['work', 'focus'], timestamp: Date.now() - 86400000 * 4 },
@@ -20,6 +21,14 @@ export const MOCK_INBOX: InboxItem[] = [
   { id: '2', content: 'https://picsum.photos/seed/ui-design/400/300', type: 'image', timestamp: Date.now() - 50000, processed: false },
 ];
 
+export const MOCK_SUBSCRIPTIONS: SubscriptionItem[] = [
+  { id: '1', name: 'Netflix', price: 15.99, currency: 'USD', cycle: 'monthly', nextBillingDate: Date.now() + 86400000 * 5, category: 'entertainment', isPrivate: true, icon: '🍿' },
+  { id: '2', name: 'Spotify', price: 9.99, currency: 'USD', cycle: 'monthly', nextBillingDate: Date.now() + 86400000 * 12, category: 'entertainment', isPrivate: true, icon: '🎵' },
+  { id: '3', name: 'GitHub Copilot', price: 10, currency: 'USD', cycle: 'monthly', nextBillingDate: Date.now() + 86400000 * 2, category: 'productivity', isPrivate: false, icon: '💻' },
+  { id: '4', name: 'Gym Membership', price: 300, currency: 'CNY', cycle: 'monthly', nextBillingDate: Date.now() + 86400000 * 20, category: 'life', isPrivate: true, icon: '💪' },
+  { id: '5', name: 'Adobe Cloud', price: 52.99, currency: 'USD', cycle: 'monthly', nextBillingDate: Date.now() + 86400000 * 15, category: 'productivity', isPrivate: false, icon: '🎨' },
+];
+
 export const TRANSLATIONS = {
   en: {
     // Sidebar
@@ -27,6 +36,7 @@ export const TRANSLATIONS = {
     inbox: 'Inbox',
     notes: 'Notes',
     mood: 'Mood',
+    subs: 'Subs',
     settings: 'Settings',
     workMode: 'Work Mode',
     lifeMode: 'Life Mode',
@@ -65,6 +75,15 @@ export const TRANSLATIONS = {
     emptyInboxTitle: 'Your mind is clear.',
     emptyInboxDesc: 'Type below to capture ideas.',
     captureIdea: 'Capture an idea...',
+
+    // Subscriptions
+    subsTitle: 'Subscription Sentinel',
+    subsDesc: 'Manage your recurring digital life costs.',
+    monthlyCost: 'Monthly Cost',
+    nextBilling: 'Upcoming Billing',
+    activeSubs: 'Active Subs',
+    addSub: 'Add Sub',
+    private: 'PRIVATE',
   },
   zh: {
     // Sidebar
@@ -72,6 +91,7 @@ export const TRANSLATIONS = {
     inbox: '收集箱',
     notes: '笔记',
     mood: '心情',
+    subs: '订阅',
     settings: '设置',
     workMode: '办公模式',
     lifeMode: '生活模式',
@@ -110,5 +130,14 @@ export const TRANSLATIONS = {
     emptyInboxTitle: '当前没有待办。',
     emptyInboxDesc: '在下方输入以快速捕捉灵感。',
     captureIdea: '捕捉一个想法...',
+
+    // Subscriptions
+    subsTitle: '订阅哨兵',
+    subsDesc: '管理你的数字生活经常性支出。',
+    monthlyCost: '月度支出',
+    nextBilling: '即将扣费',
+    activeSubs: '活跃订阅',
+    addSub: '添加订阅',
+    private: '私密',
   }
 };

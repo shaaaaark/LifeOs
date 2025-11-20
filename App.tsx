@@ -1,10 +1,12 @@
+
 import React, { useState, useEffect } from 'react';
 import { Sidebar } from './components/Sidebar';
 import { Dashboard } from './components/Dashboard';
 import { MoodTracker } from './components/MoodTracker';
 import { Inbox } from './components/Inbox';
-import { ViewMode, MoodEntry, NoteEntry, InboxItem, NoteType, Language } from './types';
-import { MOCK_MOODS, MOCK_NOTES, MOCK_INBOX, TRANSLATIONS } from './constants';
+import { SubscriptionManager } from './components/SubscriptionManager';
+import { ViewMode, MoodEntry, NoteEntry, InboxItem, NoteType, Language, SubscriptionItem } from './types';
+import { MOCK_MOODS, MOCK_NOTES, MOCK_INBOX, MOCK_SUBSCRIPTIONS, TRANSLATIONS } from './constants';
 
 function App() {
   // --- Global State ---
@@ -17,6 +19,7 @@ function App() {
   const [moods, setMoods] = useState<MoodEntry[]>(MOCK_MOODS);
   const [notes, setNotes] = useState<NoteEntry[]>(MOCK_NOTES);
   const [inboxItems, setInboxItems] = useState<InboxItem[]>(MOCK_INBOX);
+  const [subscriptions, setSubscriptions] = useState<SubscriptionItem[]>(MOCK_SUBSCRIPTIONS);
 
   const t = TRANSLATIONS[language];
 
@@ -70,6 +73,8 @@ function App() {
         );
       case ViewMode.INBOX:
         return <Inbox items={inboxItems} onAddItem={handleAddInboxItem} language={language} />;
+      case ViewMode.SUBSCRIPTIONS:
+        return <SubscriptionManager subscriptions={subscriptions} workMode={workMode} language={language} />;
       case ViewMode.NOTES:
         return (
           <div className="animate-fade-in">
@@ -115,4 +120,32 @@ function App() {
             }`} />
 
             {/* Blob 3: Middle - subtle mover */}
-            <div className={`absolute top-[30%] left-[30%] w-[40
+            <div className={`absolute top-[30%] left-[30%] w-[40%] h-[40%] rounded-full blur-[80px] transition-all duration-1000 opacity-30 animate-pulse-slow ${
+                workMode
+                    ? 'bg-sky-100 dark:bg-sky-900/20'
+                    : 'bg-yellow-100 dark:bg-pink-900/20'
+            }`} />
+        </div>
+
+        <Sidebar 
+            currentView={currentView} 
+            setCurrentView={setCurrentView} 
+            workMode={workMode}
+            toggleWorkMode={toggleWorkMode}
+            darkMode={darkMode}
+            toggleTheme={toggleTheme}
+            language={language}
+            toggleLanguage={toggleLanguage}
+        />
+        
+        <main className="flex-1 relative overflow-y-auto z-10">
+            <div className="container mx-auto max-w-7xl px-4 lg:px-12 py-8 lg:py-12 min-h-screen">
+            {renderContent()}
+            </div>
+        </main>
+        </div>
+    </div>
+  );
+}
+
+export default App;

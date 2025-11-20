@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { 
   LayoutDashboard, 
@@ -10,7 +11,7 @@ import {
   Sparkles,
   Sun,
   Moon,
-  Languages
+  CreditCard
 } from 'lucide-react';
 import { ViewMode, Language } from '../types';
 import { TRANSLATIONS } from '../constants';
@@ -43,6 +44,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
     { id: ViewMode.DASHBOARD, icon: LayoutDashboard, label: t.home, private: false },
     { id: ViewMode.INBOX, icon: Inbox, label: t.inbox, private: false },
     { id: ViewMode.NOTES, icon: FileText, label: t.notes, private: false },
+    { id: ViewMode.SUBSCRIPTIONS, icon: CreditCard, label: t.subs, private: false },
     { id: ViewMode.MOOD, icon: Smile, label: t.mood, private: true },
     { id: ViewMode.SETTINGS, icon: Settings, label: t.settings, private: false },
   ];
