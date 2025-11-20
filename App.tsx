@@ -6,8 +6,9 @@ import { MoodTracker } from './components/MoodTracker';
 import { Inbox } from './components/Inbox';
 import { SubscriptionManager } from './components/SubscriptionManager';
 import { SocialCRM } from './components/SocialCRM';
-import { ViewMode, MoodEntry, NoteEntry, InboxItem, NoteType, Language, SubscriptionItem, Contact } from './types';
-import { MOCK_MOODS, MOCK_NOTES, MOCK_INBOX, MOCK_SUBSCRIPTIONS, MOCK_CONTACTS, TRANSLATIONS } from './constants';
+import { FlowCenter } from './components/FlowCenter';
+import { ViewMode, MoodEntry, NoteEntry, InboxItem, NoteType, Language, SubscriptionItem, Contact, FlowItem, FlowStatus } from './types';
+import { MOCK_MOODS, MOCK_NOTES, MOCK_INBOX, MOCK_SUBSCRIPTIONS, MOCK_CONTACTS, MOCK_FLOW_ITEMS, TRANSLATIONS } from './constants';
 
 function App() {
   // --- Global State ---
@@ -22,6 +23,7 @@ function App() {
   const [inboxItems, setInboxItems] = useState<InboxItem[]>(MOCK_INBOX);
   const [subscriptions, setSubscriptions] = useState<SubscriptionItem[]>(MOCK_SUBSCRIPTIONS);
   const [contacts, setContacts] = useState<Contact[]>(MOCK_CONTACTS);
+  const [flowItems, setFlowItems] = useState<FlowItem[]>(MOCK_FLOW_ITEMS);
 
   const t = TRANSLATIONS[language];
 
@@ -59,6 +61,10 @@ function App() {
     setInboxItems(prev => [...prev, newItem]);
   };
 
+  const handleUpdateFlowStatus = (id: string, status: FlowStatus) => {
+      setFlowItems(prev => prev.map(item => item.id === id ? { ...item, status } : item));
+  };
+
   // --- Render Content Logic ---
   const renderContent = () => {
     switch (currentView) {
@@ -79,6 +85,8 @@ function App() {
         return <SubscriptionManager subscriptions={subscriptions} workMode={workMode} language={language} />;
       case ViewMode.SOCIAL:
         return <SocialCRM contacts={contacts} moods={moods} workMode={workMode} language={language} />;
+      case ViewMode.FLOW:
+        return <FlowCenter items={flowItems} onUpdateStatus={handleUpdateFlowStatus} workMode={workMode} language={language} />;
       case ViewMode.NOTES:
         return (
           <div className="animate-fade-in">

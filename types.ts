@@ -6,6 +6,7 @@ export enum ViewMode {
   NOTES = 'NOTES',
   SUBSCRIPTIONS = 'SUBSCRIPTIONS',
   SOCIAL = 'SOCIAL',
+  FLOW = 'FLOW',
   SETTINGS = 'SETTINGS'
 }
 
@@ -75,6 +76,21 @@ export interface Contact {
   lastContactDate: number;
   frequencyTargetDays: number; // e.g. 7 means contact once a week
   isPrivate: boolean; // Hidden in Work Mode
+}
+
+// New Feature: Flow / Read-it-Later
+export type FlowStatus = 'inbox' | 'reading' | 'archived';
+export type FlowCategory = 'tech' | 'news' | 'entertainment' | 'social' | 'other';
+
+export interface FlowItem {
+    id: string;
+    title: string;
+    url: string;
+    domain: string;
+    status: FlowStatus;
+    category: FlowCategory;
+    timestamp: number;
+    isPrivate: boolean; // Hidden in Work Mode (e.g. Bilibili, Entertainment)
 }
 
 export interface UserSettings {

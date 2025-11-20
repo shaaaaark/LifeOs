@@ -12,7 +12,8 @@ import {
   Sun,
   Moon,
   CreditCard,
-  HeartHandshake
+  HeartHandshake,
+  Layers
 } from 'lucide-react';
 import { ViewMode, Language } from '../types';
 import { TRANSLATIONS } from '../constants';
@@ -44,6 +45,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
   const menuItems = [
     { id: ViewMode.DASHBOARD, icon: LayoutDashboard, label: t.home, private: false },
     { id: ViewMode.INBOX, icon: Inbox, label: t.inbox, private: false },
+    { id: ViewMode.FLOW, icon: Layers, label: t.flow, private: false },
     { id: ViewMode.NOTES, icon: FileText, label: t.notes, private: false },
     { id: ViewMode.SUBSCRIPTIONS, icon: CreditCard, label: t.subs, private: false },
     { id: ViewMode.SOCIAL, icon: HeartHandshake, label: t.social, private: false },
@@ -82,7 +84,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
       </div>
 
       {/* Navigation */}
-      <nav className="flex-1 px-3 lg:px-6 space-y-2 py-4 overflow-y-auto relative z-10">
+      <nav className="flex-1 px-3 lg:px-6 space-y-2 py-4 overflow-y-auto relative z-10 custom-scrollbar">
         {menuItems.map((item) => {
           if (workMode && item.private) return null;
 

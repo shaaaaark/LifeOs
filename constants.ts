@@ -1,5 +1,5 @@
 
-import { MoodEntry, MoodLevel, NoteEntry, NoteType, InboxItem, Language, SubscriptionItem, Contact } from './types';
+import { MoodEntry, MoodLevel, NoteEntry, NoteType, InboxItem, Language, SubscriptionItem, Contact, FlowItem } from './types';
 
 export const MOCK_MOODS: MoodEntry[] = [
   { id: '1', level: MoodLevel.GOOD, note: 'Productive morning', tags: ['work', 'focus'], timestamp: Date.now() - 86400000 * 4, contactIds: ['c3'] },
@@ -37,6 +37,14 @@ export const MOCK_CONTACTS: Contact[] = [
   { id: 'c5', name: 'Sarah', role: 'Partner', avatar: '❤️', type: 'partner', lastContactDate: Date.now() - 86400000 * 0.5, frequencyTargetDays: 1, isPrivate: true },
 ];
 
+export const MOCK_FLOW_ITEMS: FlowItem[] = [
+    { id: 'f1', title: 'Advanced React Patterns', url: 'https://react.dev', domain: 'react.dev', status: 'inbox', category: 'tech', timestamp: Date.now() - 3600000, isPrivate: false },
+    { id: 'f2', title: 'Top 10 Movies of 2024', url: 'https://imdb.com', domain: 'imdb.com', status: 'inbox', category: 'entertainment', timestamp: Date.now() - 7200000, isPrivate: true },
+    { id: 'f3', title: 'Understanding Cloudflare Workers', url: 'https://cloudflare.com', domain: 'cloudflare.com', status: 'reading', category: 'tech', timestamp: Date.now() - 86400000, isPrivate: false },
+    { id: 'f4', title: 'Weekend Brunch Recipes', url: 'https://cooking.com', domain: 'cooking.com', status: 'archived', category: 'other', timestamp: Date.now() - 172800000, isPrivate: true },
+    { id: 'f5', title: 'Competitor Analysis Q3', url: 'https://internal.confluence.com', domain: 'internal', status: 'reading', category: 'tech', timestamp: Date.now() - 20000, isPrivate: false },
+];
+
 export const TRANSLATIONS = {
   en: {
     // Sidebar
@@ -46,6 +54,7 @@ export const TRANSLATIONS = {
     mood: 'Mood',
     subs: 'Subs',
     social: 'Social',
+    flow: 'Flow',
     settings: 'Settings',
     workMode: 'Work Mode',
     lifeMode: 'Life Mode',
@@ -106,6 +115,16 @@ export const TRANSLATIONS = {
     recharging: 'Recharging',
     draining: 'Draining',
     neutral: 'Neutral',
+
+    // Flow
+    flowTitle: 'Flow Center',
+    flowDesc: 'Your reading buffer. Catch now, read later.',
+    inboxStatus: 'Unread',
+    readingStatus: 'Reading',
+    archivedStatus: 'Archived',
+    readNow: 'Read Now',
+    archive: 'Archive',
+    moveToInbox: 'Move to Inbox',
   },
   zh: {
     // Sidebar
@@ -115,6 +134,7 @@ export const TRANSLATIONS = {
     mood: '心情',
     subs: '订阅',
     social: '人脉',
+    flow: '流转',
     settings: '设置',
     workMode: '办公模式',
     lifeMode: '生活模式',
@@ -175,5 +195,15 @@ export const TRANSLATIONS = {
     recharging: '充电',
     draining: '耗能',
     neutral: '中性',
+
+    // Flow
+    flowTitle: '稍后读流转',
+    flowDesc: '你的阅读缓冲区。随时捕获，深度阅读。',
+    inboxStatus: '未读',
+    readingStatus: '在读',
+    archivedStatus: '已归档',
+    readNow: '开始阅读',
+    archive: '归档',
+    moveToInbox: '放回未读',
   }
 };
