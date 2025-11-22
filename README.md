@@ -1,137 +1,50 @@
-# 🌐 LifeOS – Cross-Platform Personal Life Operating System
+# 心流 (Flow) - 个人成长与知识内化系统
 
-> A multi-platform personal data operating system designed to unify emotion tracking, habit management, notes, media storage, reading workflow, social CRM, subscription tracking and health insights — all synchronized across devices with modern cloud architecture.
+> **定位**：一款面向个人用户的多端应用，旨在支持用户进行自我回顾、自我理解和自我提升。
 
-LifeOS is **not** just an app.  
-It is your **personal digital infrastructure** across Web, Mobile, Desktop, Micro-Frontends, and Lightweight Clients.
-
----
-
-## ✨ Core Features
-
-### 🧠 1. Emotion Tracking (Mood)
-- 1–5 mood scoring
-- Tags, notes, photos
-- Beautiful charts (daily/weekly/monthly trends)
-- Device-wide synchronization
-
-### 🔄 2. Habit Tracker
-- Daily habits  
-- Streak tracking  
-- Weekly/Monthly analytics  
-
-### 📝 3. Notes (Markdown)
-- Cross-device note-taking  
-- Markdown editor  
-- “Work-safe” notes for office usage  
-
-### 🖼 4. Media Library
-- Photos, screenshots, files
-- Tagging, filtering, album organization
-- Cloudflare R2 / Supabase Storage
-
-### 📥 5. Inbox (Quick Capture)
-- Desktop: paste text, screenshots, drag files
-- Mobile: quick notes & camera uploads
-- Acts as the “inbox layer” for your life
-
-### 📊 6. Dashboard
-- Mood & habit trends  
-- Activity heatmaps  
-- Upload statistics  
-- Productivity metrics  
+心流不是传统意义上的“系统”或办公工具，而是一个围绕“自我”展开的个人成长产品。它以数据记录、知识加工和反思机制为核心，帮助用户在工作、学习和生活场景中保持专注并持续改进。
 
 ---
 
-## 🚀 V1.5 – V2.0 Extended Modules
+## 一、核心理念
 
-### 💳 Subscription Sentinel
-Track subscription costs, expiry dates, and reminders.  
-Automatically calculates daily cost.
-
-### 👥 Social Energy CRM
-Understand how different people affect your emotional energy.  
-Set “care frequency” rules for important relationships.
-
-### 📚 Read-It-Later Hub
-Unified reading workflow across devices.  
-Mobile → Desktop → Notes.
-
-### 🔋 Body Battery Sync
-Sync sleep, steps, heart rate with Apple Health / Google Fit.  
-Correlate health metrics with habits & mood.
-
-### 🕰 Time Capsule / On This Day
-Daily memory review — photos, notes, mood from past years.
+1.  **记录是基础，但理解才是关键**：记录生活和知识本身并不能带来改变，只有经过整理、提取与理解，内容才能转化为个人能力。
+2.  **理解需要反馈与反刍**：阅读、笔记和学习内容需要通过提问、复习、再加工等方式得到强化。
+3.  **长期成长依赖于持续投入**：通过简化记录流程、自动化整理流程和结构化反馈流程，维持长期的自我提升。
 
 ---
 
-## 🖥 Multi-Platform Architecture
+## 二、产品结构 (Dual Layer Architecture)
 
-LifeOS runs everywhere:
+### （一）生活记录能力 (Life Layer)
+帮助用户形成稳定的"生活数据轨迹"：
+*   **情绪记录 (Mood)**: 记录当下感受，关联人际与事件。
+*   **收集箱 (Inbox)**: 碎片信息、截图、灵感的快速入口。
+*   **订阅哨兵 (Subs)**: 管理数字生活成本。
+*   **人脉能量 (Social)**: 追踪人际关系维护频率与能量影响。
+*   **稍后读流转 (Flow)**: 跨端阅读缓冲区。
 
-- **Web (React + Vite)**  
-- **Mobile (React Native)**  
-- **Desktop (Tauri)**  
-- **Micro-frontend (Vue3)**  
-- **Hippy Lightweight App**  
-- **Admin Console (React / Next.js)**  
-
----
-
-## 🏗️ Tech Stack
-
-### 📦 Monorepo
-- Turborepo
-- PNPM Workspaces  
-- Shared Types / SDK / UI  
-
-### 🛠 Backend
-- **Supabase** (PostgreSQL + Auth + Realtime)
-- **Cloudflare Workers** (Sync logic)
-- **Cloudflare R2** (Media storage)
-- **SQLite** (Desktop offline mode)
+### （二）知识理解能力 (Knowledge Layer)
+帮助用户将"输入"转化为"可理解"与"可吸收"的内容：
+*   **笔记 (Notes)**: 结构化文档管理。
+*   **知识库 (Knowledge Base)**:
+    *   **每日复习**: 基于间隔重复 (Spaced Repetition) 的卡片复习。
+    *   **知识提取**: AI 辅助从笔记中提取关键问答。
+    *   **掌握度分析**: 可视化知识内化进度。
 
 ---
 
-## 🔐 Work Mode (Privacy-First)
-Designed for office computers:
+## 三、技术特性
 
-- Hide personal emotions  
-- Hide private photos/notes  
-- Only show “work-safe” data  
-- Automatic switch based on time or manual toggle  
-
----
-
-## 🛡 Data Ownership
-Your data is **yours**.
-
-- Export `backup.json`  
-- Import schema  
-- Full restore / clean-reset  
+*   **多端架构**: Web / Mobile / Desktop (Tauri) / Micro-frontend
+*   **Monorepo**: TurboRepo + PNPM
+*   **隐私设计**: 办公模式 (Work Mode) 自动隐藏私人数据
+*   **数据主权**: 支持完整 Schema 导出与离线优先 (Offline-first)
 
 ---
 
-## 🛣 Roadmap (Simplified)
+## 四、核心价值
 
-- [x] Core modules (Mood, Habits, Notes, Media, Inbox)
-- [x] Multi-device Realtime Sync
-- [ ] Subscription Sentinel
-- [ ] Social Energy CRM
-- [ ] Read-It-Later Hub
-- [ ] Body Battery Sync
-- [ ] Time Capsule
-- [ ] AI Assistant (Insights & Reflection)
+记录 → 理解 → 反思 → 成长
 
----
-
-## 📜 License
-MIT
-
----
-
-## 🤝 Contributing
-Contributions welcome!  
-Feel free to open issues or submit PRs.
-
+心流致力于让用户在跨设备场景下持续保持专注，并逐步理解自己，形成可观察的成长轨迹。

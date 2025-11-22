@@ -4,6 +4,7 @@ export enum ViewMode {
   MOOD = 'MOOD',
   INBOX = 'INBOX',
   NOTES = 'NOTES',
+  KNOWLEDGE = 'KNOWLEDGE', // New
   SUBSCRIPTIONS = 'SUBSCRIPTIONS',
   SOCIAL = 'SOCIAL',
   FLOW = 'FLOW',
@@ -91,6 +92,19 @@ export interface FlowItem {
     category: FlowCategory;
     timestamp: number;
     isPrivate: boolean; // Hidden in Work Mode (e.g. Bilibili, Entertainment)
+}
+
+// New Feature: Knowledge Layer (Flashcards)
+export type MasteryLevel = 'new' | 'learning' | 'reviewing' | 'mastered';
+
+export interface Flashcard {
+  id: string;
+  question: string;
+  answer: string;
+  sourceNoteId?: string; // Link back to the source note
+  mastery: MasteryLevel;
+  nextReviewDate: number;
+  tags: string[];
 }
 
 export interface UserSettings {

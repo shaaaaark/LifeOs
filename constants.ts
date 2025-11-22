@@ -1,5 +1,5 @@
 
-import { MoodEntry, MoodLevel, NoteEntry, NoteType, InboxItem, Language, SubscriptionItem, Contact, FlowItem } from './types';
+import { MoodEntry, MoodLevel, NoteEntry, NoteType, InboxItem, Language, SubscriptionItem, Contact, FlowItem, Flashcard } from './types';
 
 export const MOCK_MOODS: MoodEntry[] = [
   { id: '1', level: MoodLevel.GOOD, note: 'Productive morning', tags: ['work', 'focus'], timestamp: Date.now() - 86400000 * 4, contactIds: ['c3'] },
@@ -45,6 +45,13 @@ export const MOCK_FLOW_ITEMS: FlowItem[] = [
     { id: 'f5', title: 'Competitor Analysis Q3', url: 'https://internal.confluence.com', domain: 'internal', status: 'reading', category: 'tech', timestamp: Date.now() - 20000, isPrivate: false },
 ];
 
+export const MOCK_FLASHCARDS: Flashcard[] = [
+  { id: 'fc1', question: 'What is the key difference between Work Mode and Life Mode in LifeOS?', answer: 'Work Mode hides private data like Moods and Entertainment subscriptions.', mastery: 'new', nextReviewDate: Date.now(), tags: ['LifeOS'] },
+  { id: 'fc2', question: 'How does the Knowledge Layer differ from simple Notes?', answer: 'It focuses on understanding via vectorization and Spaced Repetition, not just storage.', mastery: 'learning', nextReviewDate: Date.now(), tags: ['Concept'] },
+  { id: 'fc3', question: 'What architecture does LifeOS use for sync?', answer: 'Offline-first SQLite on Desktop with Supabase/Cloudflare cloud sync.', mastery: 'mastered', nextReviewDate: Date.now() + 86400000 * 3, tags: ['Tech'] },
+  { id: 'fc4', question: 'Explain the "Social Energy" concept.', answer: 'It tracks how interactions with specific contacts affect your mood levels over time.', mastery: 'reviewing', nextReviewDate: Date.now(), tags: ['Features'] },
+];
+
 export const TRANSLATIONS = {
   en: {
     // Sidebar
@@ -55,6 +62,7 @@ export const TRANSLATIONS = {
     subs: 'Subs',
     social: 'Social',
     flow: 'Flow',
+    knowledge: 'Knowledge',
     settings: 'Settings',
     workMode: 'Work Mode',
     lifeMode: 'Life Mode',
@@ -125,6 +133,22 @@ export const TRANSLATIONS = {
     readNow: 'Read Now',
     archive: 'Archive',
     moveToInbox: 'Move to Inbox',
+
+    // Knowledge
+    knowTitle: 'Knowledge Base',
+    knowDesc: 'Review, internalize, and master your insights.',
+    dailyReview: 'Daily Review',
+    cardsDue: 'Cards Due',
+    masteryProgress: 'Mastery Progress',
+    startSession: 'Start Session',
+    flipCard: 'Flip Card',
+    remembered: 'I Remembered',
+    forgot: 'I Forgot',
+    library: 'Library',
+    vectorized: 'Vectorized',
+    learning: 'Learning',
+    mastered: 'Mastered',
+    aiGenerating: 'AI Generating Questions...',
   },
   zh: {
     // Sidebar
@@ -135,6 +159,7 @@ export const TRANSLATIONS = {
     subs: '订阅',
     social: '人脉',
     flow: '流转',
+    knowledge: '知识库',
     settings: '设置',
     workMode: '办公模式',
     lifeMode: '生活模式',
@@ -205,5 +230,21 @@ export const TRANSLATIONS = {
     readNow: '开始阅读',
     archive: '归档',
     moveToInbox: '放回未读',
+
+    // Knowledge
+    knowTitle: '知识库',
+    knowDesc: '复习、内化并掌握你的洞见。',
+    dailyReview: '每日复习',
+    cardsDue: '今日待复习',
+    masteryProgress: '掌握进度',
+    startSession: '开始复习',
+    flipCard: '翻转卡片',
+    remembered: '记得',
+    forgot: '忘记了',
+    library: '知识库',
+    vectorized: '已向量化',
+    learning: '学习中',
+    mastered: '已掌握',
+    aiGenerating: 'AI 正在生成题目...',
   }
 };

@@ -7,8 +7,9 @@ import { Inbox } from './components/Inbox';
 import { SubscriptionManager } from './components/SubscriptionManager';
 import { SocialCRM } from './components/SocialCRM';
 import { FlowCenter } from './components/FlowCenter';
-import { ViewMode, MoodEntry, NoteEntry, InboxItem, NoteType, Language, SubscriptionItem, Contact, FlowItem, FlowStatus } from './types';
-import { MOCK_MOODS, MOCK_NOTES, MOCK_INBOX, MOCK_SUBSCRIPTIONS, MOCK_CONTACTS, MOCK_FLOW_ITEMS, TRANSLATIONS } from './constants';
+import { KnowledgeBase } from './components/KnowledgeBase';
+import { ViewMode, MoodEntry, NoteEntry, InboxItem, NoteType, Language, SubscriptionItem, Contact, FlowItem, FlowStatus, Flashcard, MasteryLevel } from './types';
+import { MOCK_MOODS, MOCK_NOTES, MOCK_INBOX, MOCK_SUBSCRIPTIONS, MOCK_CONTACTS, MOCK_FLOW_ITEMS, MOCK_FLASHCARDS, TRANSLATIONS } from './constants';
 
 function App() {
   // --- Global State ---
@@ -24,6 +25,7 @@ function App() {
   const [subscriptions, setSubscriptions] = useState<SubscriptionItem[]>(MOCK_SUBSCRIPTIONS);
   const [contacts, setContacts] = useState<Contact[]>(MOCK_CONTACTS);
   const [flowItems, setFlowItems] = useState<FlowItem[]>(MOCK_FLOW_ITEMS);
+  const [flashcards, setFlashcards] = useState<Flashcard[]>(MOCK_FLASHCARDS);
 
   const t = TRANSLATIONS[language];
 
@@ -65,6 +67,10 @@ function App() {
       setFlowItems(prev => prev.map(item => item.id === id ? { ...item, status } : item));
   };
 
+  const handleUpdateFlashcard = (id: string, mastery: MasteryLevel) => {
+      setFlashcards(prev => prev.map(fc => fc.id === id ? { ...fc, mastery } : fc));
+  }
+
   // --- Render Content Logic ---
   const renderContent = () => {
     switch (currentView) {
@@ -87,6 +93,8 @@ function App() {
         return <SocialCRM contacts={contacts} moods={moods} workMode={workMode} language={language} />;
       case ViewMode.FLOW:
         return <FlowCenter items={flowItems} onUpdateStatus={handleUpdateFlowStatus} workMode={workMode} language={language} />;
+      case ViewMode.KNOWLEDGE:
+        return <KnowledgeBase flashcards={flashcards} onUpdateCard={handleUpdateFlashcard} language={language} />;
       case ViewMode.NOTES:
         return (
           <div className="animate-fade-in">

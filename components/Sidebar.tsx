@@ -13,7 +13,8 @@ import {
   Moon,
   CreditCard,
   HeartHandshake,
-  Layers
+  Layers,
+  Brain
 } from 'lucide-react';
 import { ViewMode, Language } from '../types';
 import { TRANSLATIONS } from '../constants';
@@ -46,9 +47,10 @@ export const Sidebar: React.FC<SidebarProps> = ({
     { id: ViewMode.DASHBOARD, icon: LayoutDashboard, label: t.home, private: false },
     { id: ViewMode.INBOX, icon: Inbox, label: t.inbox, private: false },
     { id: ViewMode.FLOW, icon: Layers, label: t.flow, private: false },
-    { id: ViewMode.NOTES, icon: FileText, label: t.notes, private: false },
-    { id: ViewMode.SUBSCRIPTIONS, icon: CreditCard, label: t.subs, private: false },
     { id: ViewMode.SOCIAL, icon: HeartHandshake, label: t.social, private: false },
+    { id: ViewMode.SUBSCRIPTIONS, icon: CreditCard, label: t.subs, private: false },
+    { id: ViewMode.NOTES, icon: FileText, label: t.notes, private: false },
+    { id: ViewMode.KNOWLEDGE, icon: Brain, label: t.knowledge, private: false }, // New Knowledge Item
     { id: ViewMode.MOOD, icon: Smile, label: t.mood, private: true },
     { id: ViewMode.SETTINGS, icon: Settings, label: t.settings, private: false },
   ];
@@ -76,7 +78,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
           <Sparkles className="w-6 h-6" />
         </div>
         <div className="hidden lg:block">
-           <h1 className="text-2xl font-bold tracking-tight dark:text-white text-stone-800">LifeOS</h1>
+           <h1 className="text-2xl font-bold tracking-tight dark:text-white text-stone-800">Flow</h1>
            <p className="text-xs font-semibold tracking-wider uppercase opacity-50 dark:text-zinc-400 text-stone-500">
              {workMode ? t.deepWork : t.personal}
            </p>
